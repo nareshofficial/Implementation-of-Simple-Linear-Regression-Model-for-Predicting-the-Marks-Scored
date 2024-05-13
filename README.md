@@ -1,79 +1,92 @@
-# Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored
+# EX-02 Implementation of Simple Linear Regression Model for Predicting the Marks Scored
 
-## AIM:
-To write a program to predict the marks scored by a student using the simple linear regression model.
+### AIM:
+To predict the marks scored by a student using the simple linear regression model.
 
-## Equipments Required:
+### Equipments Required:
 1. Hardware – PCs
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
-## Algorithm
-1. Import the required libaries and read the dataframe.
-2. Assign hours to X and scores to Y.
-3. Implement training set and test set of the dataframe.
-4. Plot the required graph both for test data and training data.
-5. Find the values of MSE,MAE and RMSE.
+### Algorithm
+1. Import pandas, numpy and sklearn.
+2. Calculate the values for the training data set.
+3. Calculate the values for the test data set.
+4. Plot the graph for both the data sets and calculate for MAE, MSE and RMSE.
 
-## Program:
-```
-/*
-Program to implement the linear regression using gradient descent.
-Developed by:NARESH.P.S
-RegisterNumber:212223040127
-*/
-
+### Program:
+NAME-NARESH.P.S
+REG-212223040127
+```Python
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_absolute_error,mean_squared_error
-df=pd.read_csv('student_scores.csv')
-print(df)
-df.head(0)
-df.tail(0)
-print(df.head())
-print(df.tail())
-x = df.iloc[:,:-1].values
-print(x)
-y = df.iloc[:,1].values
-print(y)
-from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=1/3,random_state=0)
-from sklearn.linear_model import LinearRegression
-regressor = LinearRegression()
-regressor.fit(x_train,y_train)
-y_pred = regressor.predict(x_test)
-print(y_pred)
-print(y_test)
-#Graph plot for training data
-plt.scatter(x_train,y_train,color='black')
-plt.plot(x_train,regressor.predict(x_train),color='blue')
-plt.title("Hours vs Scores(Training set)")
+df=pd.read_csv("CSVs/student_scores.csv")
+df.head()
+df.tail()
+X,Y=df.iloc[:,:-1].values, df.iloc[:,1].values
+print(X)
+print(Y)
+from sklearn.model_selection import train_test_split as tts
+Xtrain,Xtest,Ytrain,Ytest=tts(X,Y,test_size=1/3,random_state=0)
+from sklearn.linear_model import LinearRegression as lr
+reg=lr()
+reg.fit(Xtrain,Ytrain)
+Ypred=reg.predict(Xtest)
+print(Ypred)
+plt.scatter(Xtrain,Ytrain,color="orange")
+plt.plot(Xtrain,reg.predict(Xtrain),color="red")
+plt.title("Hours vs Scores (Training Set)")
 plt.xlabel("Hours")
 plt.ylabel("Scores")
 plt.show()
-#Graph plot for test data
-plt.scatter(x_test,y_test,color='black')
-plt.plot(x_train,regressor.predict(x_train),color='red')
-plt.title("Hours vs Scores(Testing set)")
+plt.scatter(Xtest,Ytest,color="blue")
+plt.plot(Xtest,reg.predict(Xtest),color="green")
+plt.title("Hours vs Scores (Test Set)")
 plt.xlabel("Hours")
 plt.ylabel("Scores")
 plt.show()
-mse=mean_absolute_error(y_test,y_pred)
-print('MSE = ',mse)
-mae=mean_absolute_error(y_test,y_pred)
-print('MAE = ',mae)
-rmse=np.sqrt(mse)
-print("RMSE= ",rmse)
-
+print("MSE : ",mean_squared_error(Ytest,Ypred))
+print("MAE : ",mean_absolute_error(Ytest,Ypred))
+print("RMSE : ",np.sqrt(mse))
 ```
-## Output:
-![image](https://github.com/23004513/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/138973069/0d06a575-94a7-40be-ad2f-b925a14db9ac)        
-![image](https://github.com/23004513/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/138973069/90a15f1a-c470-4482-b7d5-ca3ff99bc39e)      
-![image](https://github.com/23004513/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/138973069/2021ce29-6c1e-4511-ab0e-0e55787306dd)         
-![image](https://github.com/23004513/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/138973069/154f088d-3ca8-46ba-acb1-07dee94830d9)         
-![image](https://github.com/23004513/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/138973069/a3d1f641-5f76-49b3-9a53-7084d3867b54)       
-![image](https://github.com/23004513/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/138973069/d3b9639e-1e6d-498e-89d7-938f3650f95a)       
+### Output:
+<table>
+<tr>
+<td width=45%>
+  
+**df.head()** <br>
+![Screenshot 2024-02-26 212319](https://github.com/ROHITJAIND/EX-02-SimpleLinearRegressionModel-for-Predicting-the-Marks-Scored/assets/118707073/2d1ff80d-8215-440b-806c-658ab5b149f1)<br>
 
+**df.tail** <br>
+![Screenshot 2024-02-26 212329](https://github.com/ROHITJAIND/EX-02-SimpleLinearRegressionModel-for-Predicting-the-Marks-Scored/assets/118707073/93f89060-3a29-4fb2-99a5-bef6a9f6db53)
+</td> 
+<td>
+  
+**X and Y values split** <br>
+ ![Screenshot 2024-02-26 212209](https://github.com/ROHITJAIND/EX-02-SimpleLinearRegressionModel-for-Predicting-the-Marks-Scored/assets/118707073/5b488f39-2123-4a5c-9708-9bcc33d2d82e)
+</td>
+</tr> 
+</table>
+<br>
+<br>
 
-## Result:
+**Predicted Values of Y**<br>
+![Screenshot 2024-02-26 212638](https://github.com/ROHITJAIND/EX-02-SimpleLinearRegressionModel-for-Predicting-the-Marks-Scored/assets/118707073/e2be81a2-00bc-4298-bfbc-0de77e45b642)
+<br>
+<br>
+
+**Training and Testing set**<br>
+![download](https://github.com/ROHITJAIND/EX-02-SimpleLinearRegressionModel-for-Predicting-the-Marks-Scored/assets/118707073/bc3fc02b-c6b0-40b6-b185-fdfca4659cef)
+![download](https://github.com/ROHITJAIND/EX-02-SimpleLinearRegressionModel-for-Predicting-the-Marks-Scored/assets/118707073/ae6dc783-4089-4850-a959-eb8d4bf14dc6)
+<br>
+
+**Values of MSE,MAE and RMSE**<br>
+```
+MSE :  25.463280738222547
+MAE :  4.691397441397438
+RMSE :  5.046115410711743
+```
+### Result:
 Thus the program to implement the simple linear regression model for predicting the marks scored is written and verified using python programming.
+
